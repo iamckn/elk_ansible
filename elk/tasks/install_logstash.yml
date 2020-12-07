@@ -1,0 +1,51 @@
+
+####################################################################
+# Install/Setup Logstash
+####################################################################
+- name: Add Elastic GPG key
+  apt_key:
+    url: "{{ ELASTIC_GPG_URL }}"
+    state: present
+
+- name: Add Elastic repo
+  apt_repository:
+    repo: "{{ ELASTIC_REPO_URL }}"
+    state: present
+
+- name: Install Logstash
+  apt:
+    name: 'logstash'
+    state: latest
+
+- name: Copy beats input
+  template:
+    src: "templates/logstash/02-input-beats.conf"
+    dest: "/etc/logstash/conf.d/02-input-beats.conf"
+    owner: logstash
+    group: logstash
+    mode: 0400
+
+- name: Copy zeek beats filter
+  template:
+    src: "templates/logstash/10-filter-beats-zeek.conf"
+    dest: "/etc/logstash/conf.d/10-filter-beats-zeek.conf"
+    owner: logstash
+    group: logstash
+    mode: 0400
+
+- name: Copy Elasticsearch zeek output
+  template:
+    src: "templates/logstash/20-elasticsearch-output-zeek.conf"
+    dest: "/etc/logstash/conf.d/20-elasticsearch-output-zeek.conf"
+    owner: logstash
+    group: logstash
+    mode: 0400
+
+####################################################################
+# Restart service
+####################################################################
+- name: Restart Logstash
+  service:
+    name: logstash
+    enabled: yes
+    state: restarted

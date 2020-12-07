@@ -1,0 +1,39 @@
+- name: Install gnupg and java
+  apt:
+    name:
+      - openjdk-8-jdk
+      - gnupg
+    state: present
+    update_cache: true
+
+- name: Add Elastic GPG key
+  apt_key:
+    url: "{{ ELASTIC_GPG_URL }}"
+    state: present
+
+- name: Add Elastic repo
+  apt_repository:
+    repo: "{{ ELASTIC_REPO_URL }}"
+    state: present
+
+- name: Install Elasticsearch
+  apt:
+    name: 'elasticsearch={{ ELASTIC_VERSION }}'
+
+- name: Set to single node mode
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    line: 'discovery.type: single-node'
+    create: yes
+
+- name: Set to single node mode
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    line: 'search.max_buckets: 50000'
+    create: yes
+
+- name: Restart Elasticsearch
+  service:
+    name: 'elasticsearch'
+    state: 'restarted'
+    enabled: yes

@@ -1,0 +1,17 @@
+---
+# tasks file for elk
+- name: Install elasticsearch and other prequisites on the server
+  include: 'install_elasticsearch.yml'
+  tags: install_elasticsearch
+
+- name: Install logstash
+  include: 'install_logstash.yml'
+  tags: install_logstash
+
+- name: Install kibana
+  include: 'install_kibana.yml'
+  tags: install_kibana
+
+- name: Install filebeat
+  include: 'install_filebeat.yml'
+  tags: install_filebeat

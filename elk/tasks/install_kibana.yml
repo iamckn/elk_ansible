@@ -1,0 +1,18 @@
+################################################################################
+# Install Kibana
+################################################################################
+- name: Install Kibana
+  apt:
+    name: 'kibana={{ ELASTIC_VERSION }}'
+
+- name: Set hostname for Kibana
+  lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.host:'
+    line: 'server.host: {{ ansible_default_ipv4.address }}'
+
+- name: Restart Kibana
+  service:
+    name: 'kibana'
+    state: 'restarted'
+    enabled: yes
