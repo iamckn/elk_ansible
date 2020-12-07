@@ -4,8 +4,8 @@ Ansible scripts to set up the elk stack with zeek logging
 On the client
 
 ```bash
-git clone https://github.com/iamckn/wireguard_ansible
-cd wireguard_ansible
+git clone https://github.com/iamckn/elk_ansible
+cd elk_ansible
 ```
 
 Edit the hosts file in that folder and fill in the IP field with the ELK server IP
