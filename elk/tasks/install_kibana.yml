@@ -16,3 +16,10 @@
     name: 'kibana'
     state: 'restarted'
     enabled: yes
+
+- name: Make sure kibana is running before proceeding.
+  wait_for:
+    host: '{{ ansible_default_ipv4.address }}'
+    port: '5601'
+    delay: 3
+    timeout: 300

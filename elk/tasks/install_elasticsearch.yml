@@ -37,3 +37,10 @@
     name: 'elasticsearch'
     state: 'restarted'
     enabled: yes
+
+- name: Make sure Elasticsearch is running before proceeding.
+  wait_for:
+    host: "localhost"
+    port: "9200"
+    delay: 3
+    timeout: 300
