@@ -1,3 +1,13 @@
+- name: Add Elastic GPG key
+  apt_key:
+    url: "{{ ELASTIC_GPG_URL }}"
+    state: present
+
+- name: Add Elastic repo
+  apt_repository:
+    repo: "{{ ELASTIC_REPO_URL }}"
+    state: present
+
 ################################################################################
 # Install Filebeat
 ################################################################################

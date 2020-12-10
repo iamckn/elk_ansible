@@ -39,7 +39,7 @@
     line: 'discovery.type: single-node'
     create: yes
 
-- name: Set to single node mode
+- name: Set search max buckets to 50000
   lineinfile:
     path: /etc/elasticsearch/elasticsearch.yml
     line: 'search.max_buckets: 50000'

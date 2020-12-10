@@ -8,7 +8,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /opt/zeek/logs/current/*.log
+    - /usr/local/zeek/logs/current/*.log
 
 # filestream is an experimental input. It is going to replace log input in the future.
 - type: filestream
@@ -54,7 +54,7 @@ tags: ["zeek"]
 # ------------------------------ Logstash Output -------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["localhost:5044"]
+  hosts: ["{{ FILEBEAT_OUTPUT_HOST }}:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
@@ -70,6 +70,3 @@ output.logstash:
 processors:
   - add_host_metadata:
       when.not.contains.tags: forwarded
-  - add_cloud_metadata: ~
-  - add_docker_metadata: ~
-  - add_kubernetes_metadata: ~
