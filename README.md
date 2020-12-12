@@ -1,6 +1,18 @@
 # elk_ansible
 Ansible scripts to set up the elk stack with zeek logging
 
+This will install the elk stack and filebeat. Filebeat will be installed and ship logs to port 5044.
+
+This will also set up configuration files for logstash and filebeat necessary for zeek logging. It is assumed the zeek logs are in the folder
+
+```
+/usr/local/zeek/logs/current/
+```
+
+If zeek is on a remote server, filebeat installation should be done on the remote server.
+
+Various options can be set in the elk/vars/main.yml file.
+
 # Prepare the server
 
 Set the timezone
