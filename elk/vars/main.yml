@@ -1,5 +1,6 @@
 ---
 # vars file for elk
+timezone: 'Africa/Nairobi'
 
 #Elasticsearch
 ELASTIC_VERSION: '7.9.0'
